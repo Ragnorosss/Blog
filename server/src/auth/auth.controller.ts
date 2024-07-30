@@ -7,8 +7,6 @@ import {
     Get,
     HttpStatus,
     Post,
-    Query,
-    Req,
     Res,
     UnauthorizedException,
     UseGuards,
@@ -19,7 +17,7 @@ import { UserResponse } from '@user/response';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
 import { LogInDto, RegisterDto } from './dto';
-import { IJWTPayLoad, ITokens } from './interfaces';
+import {  ITokens } from './interfaces';
 
 const REFRESH_TOKEN = 'refreshtoken';
 
