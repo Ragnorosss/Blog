@@ -17,6 +17,9 @@ model User {
   token     Token[]
   @@map("users")
 }
+// model Blog {}
+// model Post {}
+// model Chat {}
 
 model Token {
   token  String   @unique
