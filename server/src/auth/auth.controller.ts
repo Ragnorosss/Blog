@@ -9,7 +9,6 @@ import {
     Post,
     Res,
     UnauthorizedException,
-    UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';

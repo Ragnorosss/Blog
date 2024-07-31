@@ -15,18 +15,28 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   roles     Role[]
   token     Token[]
+  blog      Blog[]
+
   @@map("users")
 }
-// model Blog {}
-// model Post {}
-// model Chat {}
+
+model Blog {
+  id        Int      @id @default(autoincrement())
+  title     String
+  desc      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  @@map("blog")
+}
 
 model Token {
-  token  String   @unique
-  exp    DateTime
-  userId String
-  userAgent String @map("user-agent") 
-  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  exp       DateTime
+  userId    String
+  userAgent String   @map("user-agent")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Role {

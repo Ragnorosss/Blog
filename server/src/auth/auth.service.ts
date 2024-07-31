@@ -8,7 +8,6 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '@prisma/prisma.service';
 import { v4 } from 'uuid';
 import { add } from 'date-fns';
-import { agent } from 'supertest';
 
 @Injectable()
 export class AuthService {

@@ -30,6 +30,12 @@
       "@user/*": [
         "src/user/*"
       ],
+      "@blog": [
+        "src/blog"
+      ],
+      "@blog/*": [
+        "src/blog/*"
+      ],
       "@shared": [
         "libs/shared/src"
       ],

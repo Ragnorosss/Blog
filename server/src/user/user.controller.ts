@@ -1,22 +1,19 @@
 import { IJWTPayLoad } from '@auth/interfaces';
 import { CurrentUser, Roles } from '@shared/decorators';
 import {
-    Body,
     ClassSerializerInterceptor,
     Controller,
     Delete,
     Get,
     Param,
     ParseUUIDPipe,
-    Put,
     UseGuards,
     UseInterceptors,
 } from '@nestjs/common';
-import { Role, User } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { UserResponse } from './response' 
 import { UserService } from './user.service';
 import { RolesGuard } from '@auth/guards/role.guard';
-
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
