@@ -21,12 +21,12 @@ export class BlogController {
   }
   @Public()
   @Get(':id')
-  async findOne(id) {
+  async findOne(id: string) {
     return this.blogService.findOne(id);
   }
-  @Delete(':id')
-  async delete(@Param('id') id:number) {
-    return this.blogService.delete(+id);
+  @Delete(':id')async delete(@Param('id') id:string, @Request() req) {
+    const user = req.user; 
+    return this.blogService.delete(id, user.id);
   }
 }
 
