@@ -4,12 +4,17 @@ import * as cookieParser from 'cookie-parser';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors(
+    {
+      origin: 'http://localhost:3000', // разрешаем запросы с фронтенда
+      credentials: true, // разрешаем отправку куков
+    }
+  );
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Blog example')
+    .setDescription('The Blog API testing and working!')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('Blog')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

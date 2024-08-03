@@ -1,5 +1,5 @@
 import { IJWTPayLoad } from '@auth/interfaces';
-import { CurrentUser, Roles } from '@shared/decorators';
+import { CurrentUser, Public, Roles } from '@shared/decorators';
 import {
     ClassSerializerInterceptor,
     Controller,
@@ -31,10 +31,11 @@ export class UserController {
     ) {
         return this.userService.delete(id, user);
     }
-    @UseGuards(RolesGuard)
-    @Roles(Role.ADMIN)
+    // @UseGuards(RolesGuard)
+    // @Roles(Role.ADMIN)
     @Get()
     me(@CurrentUser() user: IJWTPayLoad) {
         return user;
     }
+    
 }

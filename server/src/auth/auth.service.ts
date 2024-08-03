@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '@prisma/prisma.service';
 import { v4 } from 'uuid';
 import { add } from 'date-fns';
+import { agent } from 'supertest';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,7 @@ export class AuthService {
     return this.generateTokens(user, agent)
   }
 
-  async register(dto:RegisterDto) {
+  async register(dto:RegisterDto, agent:string) {
     const user: User = await this.userService.findOne(dto.email).catch(err => { 
       this.logger.error(err);
       return null;
@@ -45,10 +46,7 @@ export class AuthService {
      if(user){
       throw new ConflictException('User already exists');
      } 
-    return this.userService.save(dto).catch(err=> {
-      this.logger.error(err);
-      return null;
-     });  
+    return this.userService.save(dto);
   }
   async login(dto: LogInDto, agent: string): Promise<ITokens> {
     const user: User = await this.userService.findOne(dto.email, true).catch(err => { 

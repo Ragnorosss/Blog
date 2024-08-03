@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Request } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/CreateBlog.dto';
 import { Public } from '@shared/decorators';
@@ -8,16 +8,23 @@ export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
   @Post('create-blog') 
-  async create(@Body() dto: CreateBlogDto, @Request() req) {
+  async create(@Body() dto, @Request() req) {
     return this.blogService.create({
-      ...dto,
-      user: { connect: { id: req.user.id } },
+      title: dto.title,
+      desc: dto.desc,
+      user: {
+        connect: {
+          id: req.user.id,
+          userName: req.user.userName
+        }
+      }
     });
   }
   @Public()
   @Get('all')
-  async findAll() {
-    return this.blogService.findAll();
+  async findAll(@Query('limit') limit: string) {
+    const limitNumber = limit ? parseInt(limit, 10) : undefined;
+    return this.blogService.findAll(limitNumber);
   }
   @Public()
   @Get(':id')

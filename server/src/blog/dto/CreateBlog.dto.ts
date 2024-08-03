@@ -13,4 +13,5 @@ export class CreateBlogDto {
     @IsDataURI()
     updatedAt: string
     userId: Pick<User, 'id'>
+    userNamed: Pick<User, 'userName'>
 }

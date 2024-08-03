@@ -20,10 +20,13 @@ export class UserService {
                     email: user.email,
                     roles: ['USER'],
                     password: hashedPassword,
-                }
+                    userName: user.userName,
+                },
+               
             }
         );
     }
+ 
    async findOne(idOrEmail: string, isReset: boolean = false) {
     if(isReset) {
         await this.cacheManager.del(idOrEmail);
