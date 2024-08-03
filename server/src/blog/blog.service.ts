@@ -1,6 +1,6 @@
 import { PrismaService } from '@prisma/prisma.service';
 import { Prisma, User } from '@prisma/client';
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable  } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 
 @Injectable()
@@ -10,13 +10,24 @@ export class BlogService {
         private readonly userService: UserService
     ) {}
     async create(blog: Prisma.BlogCreateInput) {
-        return this.prismaService.blog.create({
+        const blogs = this.prismaService.blog.create({
           data:{
             title: blog.title,
             desc: blog.desc,
-            userId: blog.user.connect.id
+            user: {
+              connect: {
+                id: blog.user.connect.id
+              }
+            }
           },
+          select:{
+            title: true,
+            desc: true,
+            userId: true,
+            userNamed: true
+          }
         });
+        return blogs;
     }
     async findAll() {
         return this.prismaService.blog.findMany();

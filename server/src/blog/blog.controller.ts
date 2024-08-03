@@ -8,10 +8,16 @@ export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
   @Post('create-blog') 
-  async create(@Body() dto: CreateBlogDto, @Request() req) {
+  async create(@Body() dto, @Request() req) {
     return this.blogService.create({
-      ...dto,
-      user: { connect: { id: req.user.id } },
+      title: dto.title,
+      desc: dto.desc,
+      user: {
+        connect: {
+          id: req.user.id,
+          userName: req.user.userName
+        }
+      }
     });
   }
   @Public()

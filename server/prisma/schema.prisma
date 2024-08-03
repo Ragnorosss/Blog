@@ -17,7 +17,7 @@ model User {
   roles     Role[]
   token     Token[]
   blog      Blog[]
-
+  @@unique([id, userName])
   @@map("users")
 }
 
@@ -27,8 +27,9 @@ model Blog {
   desc      String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId, userNamed], references: [id,userName])
   userId    String
+  userNamed String
   @@map("blog")
 }
 
