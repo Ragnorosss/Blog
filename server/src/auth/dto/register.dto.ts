@@ -14,4 +14,6 @@ export class RegisterDto {
     @MinLength(6)
     @Validate(IsPasswordMatchingConstraint)
     passwordRepeat:string;
+    @IsString()
+    accesToken: string
 }

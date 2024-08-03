@@ -29,8 +29,18 @@ export class BlogService {
         });
         return blogs;
     }
-    async findAll() {
-        return this.prismaService.blog.findMany();
+    async findAll(limit?: number) {
+      const queryOptions: any = {
+        orderBy: {
+          createdAt: 'desc',
+        },
+      };
+  
+      if (limit !== undefined) {
+        queryOptions.take = limit;
+      }
+  
+      return this.prismaService.blog.findMany(queryOptions);
     }
     async findOne(id: string) {
         return this.prismaService.blog.findFirst({ where: { id } });

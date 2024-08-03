@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Request } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/CreateBlog.dto';
 import { Public } from '@shared/decorators';
@@ -22,8 +22,9 @@ export class BlogController {
   }
   @Public()
   @Get('all')
-  async findAll() {
-    return this.blogService.findAll();
+  async findAll(@Query('limit') limit: string) {
+    const limitNumber = limit ? parseInt(limit, 10) : undefined;
+    return this.blogService.findAll(limitNumber);
   }
   @Public()
   @Get(':id')
