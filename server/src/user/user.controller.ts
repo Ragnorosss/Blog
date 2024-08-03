@@ -31,8 +31,8 @@ export class UserController {
     ) {
         return this.userService.delete(id, user);
     }
-    @UseGuards(RolesGuard)
-    @Roles(Role.ADMIN)
+    // @UseGuards(RolesGuard)
+    // @Roles(Role.ADMIN)
     @Get()
     me(@CurrentUser() user: IJWTPayLoad) {
         return user;

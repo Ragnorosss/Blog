@@ -8,5 +8,6 @@ export interface ITokens {
 export interface IJWTPayLoad { 
     id:string;
     email:string;
+    userName:string;
     roles: string[];
 }

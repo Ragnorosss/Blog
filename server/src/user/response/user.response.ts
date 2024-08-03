@@ -3,7 +3,7 @@ import { Exclude } from 'class-transformer';
 export class UserResponse implements User {
     id: string;
     email: string;
-    
+    userName: string;
     @Exclude()
     password: string;
     

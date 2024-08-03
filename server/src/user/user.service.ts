@@ -20,6 +20,7 @@ export class UserService {
                     email: user.email,
                     roles: ['USER'],
                     password: hashedPassword,
+                    userName: user.userName
                 }
             }
         );
