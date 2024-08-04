@@ -83,7 +83,7 @@ export class AuthController {
             secure: this.configService.get('NODE_ENV', 'development') === 'production',
             path: '/',
         });
-        res.status(HttpStatus.CREATED).json({ accessToken: tokens.accesToken });
+        res.status(HttpStatus.CREATED).json({ accessToken: tokens.accessToken });
     }
    
   }

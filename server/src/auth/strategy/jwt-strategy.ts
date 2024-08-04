@@ -7,9 +7,10 @@ import { UserService } from '@user/user.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  private readonly logger = new Logger(JwtStrategy.name)
+  private readonly logger = new Logger(JwtStrategy.name);
+
   constructor(
-    private readonly configService: ConfigService, 
+    private readonly configService: ConfigService,
     private readonly userService: UserService
   ) {
     super({
@@ -22,10 +23,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: IJWTPayLoad) {
     const user = await this.userService.findOne(payload.id).catch(err => {
       this.logger.error(err);
-      return null
-    })
-    if(!user) { 
-        throw new UnauthorizedException('User not found');
+      return null;
+    });
+    if (!user) {
+      throw new UnauthorizedException('User not found');
     }
     return payload;
   }

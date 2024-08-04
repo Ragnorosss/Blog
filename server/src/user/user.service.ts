@@ -22,7 +22,9 @@ export class UserService {
                     password: hashedPassword,
                     userName: user.userName,
                 },
-               
+                include: {
+                    posts: true, 
+                }
             }
         );
     }
@@ -36,6 +38,9 @@ export class UserService {
         const user = await this.prismaService.user.findFirst({ 
             where: { 
                 OR:[{id:idOrEmail}, {email:idOrEmail}] 
+            },
+            include: {
+                posts: true, 
             } 
         });
         if(!user) {

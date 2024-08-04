@@ -5,10 +5,10 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { BlogModule } from './blog/blog.module';
+import { PostModule } from './post/post.module';
 
 @Module({
-  imports: [UserModule, PrismaModule, AuthModule, ConfigModule.forRoot({isGlobal:true}), BlogModule],
+  imports: [UserModule, PrismaModule, AuthModule, ConfigModule.forRoot({isGlobal:true}), PostModule],
   providers: [
     {
       provide: APP_GUARD,

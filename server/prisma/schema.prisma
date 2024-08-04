@@ -16,12 +16,12 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   roles     Role[]
   token     Token[]
-  blog      Blog[]
+  posts      Post[]
   @@unique([id, userName])
   @@map("users")
 }
 
-model Blog {
+model Post {
   id        String      @id @default(uuid())
   title     String
   desc      String

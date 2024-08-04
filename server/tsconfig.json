@@ -31,10 +31,10 @@
         "src/user/*"
       ],
       "@blog": [
-        "src/blog"
+        "src/post"
       ],
       "@blog/*": [
-        "src/blog/*"
+        "src/post/*"
       ],
       "@shared": [
         "libs/shared/src"

@@ -4,13 +4,13 @@ import { BadRequestException, Injectable  } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 
 @Injectable()
-export class BlogService {
+export class PostService {
     constructor(
         private readonly prismaService: PrismaService,
         private readonly userService: UserService
     ) {}
-    async create(blog: Prisma.BlogCreateInput) {
-        const blogs = this.prismaService.blog.create({
+    async create(blog: Prisma.PostCreateInput) {
+        const blogs = this.prismaService.post.create({
           data:{
             title: blog.title,
             desc: blog.desc,
@@ -40,18 +40,18 @@ export class BlogService {
         queryOptions.take = limit;
       }
   
-      return this.prismaService.blog.findMany(queryOptions);
+      return this.prismaService.post.findMany(queryOptions);
     }
     async findOne(id: string) {
-        return this.prismaService.blog.findFirst({ where: { id } });
+        return this.prismaService.post.findFirst({ where: { id } });
     }
     async delete(id: string, userId: string) {
         const user: User = await this.userService.findOne(userId);
-        const blog = await this.prismaService.blog.findFirst({ where: { id, userId: user.id } });
+        const blog = await this.prismaService.post.findFirst({ where: { id, userId: user.id } });
         if (!blog) {
             throw new BadRequestException('Blog not found');
         }
-        return await this.prismaService.blog.delete({ where: { id } });
+        return await this.prismaService.post.delete({ where: { id } });
     }
 }
 
